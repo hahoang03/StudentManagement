@@ -12,6 +12,20 @@
         return;
     }
     
+     // Student code pattern validation: 2 uppercase letters + 3+ digits
+    if (!studentCode.matches("^[A-Z]{2}[0-9]{3,}$")) {
+        response.sendRedirect("add_student.jsp?error=Invalid student code format (e.g., SV001, IT123)");
+        return;
+    }
+    
+    // Email validation
+    if (email != null && !email.trim().isEmpty()) {
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
+            response.sendRedirect("add_student.jsp?error=Invalid email format");
+            return;
+        }
+    }
+    
     Connection conn = null;
     PreparedStatement pstmt = null;
     

@@ -68,19 +68,21 @@
     <div class="container">
         <h2>➕ Add New Student</h2>
         
+        
         <% if (request.getParameter("error") != null) { %>
             <div class="error">
                 <%= request.getParameter("error") %>
             </div>
         <% } %>
         
-        <form action="process_add.jsp" method="POST">
+<form action="process_add.jsp" method="POST" onsubmit="return submitForm(this)">
             <div class="form-group">
                 <label for="student_code">Student Code <span class="required">*</span></label>
-                <input type="text" id="student_code" name="student_code" 
-                       placeholder="e.g., SV001" required 
+                <input type="text" id="student_code" name="student_code" >
+<!--                       placeholder="e.g., SV001" required 
                        pattern="[A-Z]{2}[0-9]{3,}"
-                       title="Format: 2 uppercase letters + 3+ digits">
+                       title="Format: 2 uppercase letters + 3+ digits"-->
+                       
             </div>
             
             <div class="form-group">
@@ -103,7 +105,19 @@
             
             <button type="submit" class="btn-submit">💾 Save Student</button>
             <a href="list_students.jsp" class="btn-cancel">Cancel</a>
+       
         </form>
+        <script>
+        function submitForm(form) {
+            var btn = form.querySelector('button[type="submit"]');
+            if (!btn) return true; // no button found, allow submit
+            btn.disabled = true;
+            btn.dataset.origText = btn.textContent;
+            btn.textContent = 'Processing...';
+            return true; // allow form submit
+}
+</script>
+
     </div>
 </body>
 </html>

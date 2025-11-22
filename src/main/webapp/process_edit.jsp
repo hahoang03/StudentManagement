@@ -16,6 +16,20 @@
     Connection conn = null;
     PreparedStatement pstmt = null;
     
+    
+    
+    
+    // Email validation
+    // Email validation
+    if (email != null && !email.trim().isEmpty()) {
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
+            response.sendRedirect("add_student.jsp?error=Invalid email format");
+            return;
+        }
+    }
+    
+    
+    
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
         conn = DriverManager.getConnection(
